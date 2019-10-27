@@ -5,12 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './authorisation.component.html',
   styleUrls: ['./authorisation.component.css']
 })
-export class AuthorisationComponent implements OnInit {
+export class StartAuthorisationComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-      v = [1, 2, 3, 4]
+  public ngOnInit(): void {
+    console.log('ngOnInit');
   }
-
 }
