@@ -1,17 +1,19 @@
-<h3>Posts</h3>
-
 <app-main-post-viewer-post-list-filter
     [allowSubredditFiltering]="(hasGoldSubscription$ | async)"
     (filterApplied)="onFilterApplied()"
 ></app-main-post-viewer-post-list-filter>
 
-<p *ngIf="(isPolling$ | async)">Loading...</p>
+<app-main-spinner *ngIf="(isPolling$ | async)"></app-main-spinner>
 
-<div *ngIf="!(isPolling$ | async)">
-    <ul>
-        <li *ngFor="let post of savedPosts$ | async">
-            <a  href="https://www.reddit.com{{ post.permalink }}">{{ post.title }}</a>
-        </li>
-    </ul>
+<div *ngIf="!(isPolling$ | async)" class="grid-container quarters post-list">
+    <div *ngFor="let post of savedPosts$ | async" class="post-list-card">
+        <div class="post-list-card-header">
+            <h6>{{ post.title | truncatePostTitle }}</h6>
+            <span>r/{{ post.subreddit }}</span>
+        </div>
+        <div class="post-list-card-footer">
+            <a class="button" href="https://www.reddit.com{{ post.permalink }}" target="_blank">View</a>
+        </div>
+    </div>
 </div>
 

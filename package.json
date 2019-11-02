@@ -23,7 +23,6 @@
     "@angular/router": "^8.2.12",
     "@ngrx/effects": "^8.4.0",
     "@ngrx/store": "^8.4.0",
-    "barebones-css": "^1.1.2",
     "core-js": "^3.3.4",
     "ngrx-store-logger": "^0.2.4",
     "rxjs": "^6.5.3",

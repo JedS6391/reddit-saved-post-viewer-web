@@ -13,7 +13,8 @@ interface LimitOption {
 
 @Component({
     selector: 'app-main-post-viewer-post-list-filter',
-    templateUrl: './post-list-filter.component.html'
+    templateUrl: './post-list-filter.component.html',
+    styleUrls: ['./post-list-filter.component.css']
 })
 export class PostListFilterComponent implements OnInit, OnDestroy {
     @Input()

@@ -1,0 +1,30 @@
+.post-list {
+    max-width: 80%;
+}
+
+.post-list-card {
+    padding: 10px;
+    border: 1px solid var(--border-color-softer);
+    text-align: start;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.post-list-card-header {
+    height: 100px;
+}
+
+.post-list-card-header > span {
+    color: var(--border-color-softer);
+}
+
+.post-list-card-footer {
+    padding-top: 20px;
+    height: 50px;
+}
+
+.post-list-card-footer > .button {
+    width: 100%;
+    background-color: var(--text-color-normal);
+    color: white;
+}

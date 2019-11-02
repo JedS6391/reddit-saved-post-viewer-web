@@ -6,7 +6,8 @@ const DEFAULT_SAVED_POSTS_LIMIT = 50;
 
 @Component({
   selector: 'app-main-post-viewer',
-  templateUrl: './post-viewer.component.html'
+  templateUrl: './post-viewer.component.html',
+  styleUrls: ['./post-viewer.component.css']
 })
 export class PostViewerComponent implements OnInit {
     public isLoading$: Observable<boolean>;

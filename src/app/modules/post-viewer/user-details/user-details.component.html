@@ -1,7 +1,6 @@
-<h3>User details</h3>
-
-<p *ngIf="(isLoading$ | async)">Loading...</p>
+<app-main-spinner *ngIf="(isLoading$ | async)"></app-main-spinner>
 
 <div *ngIf="!(isLoading$ | async)">
-    <p>Name: {{ (userDetails$ | async)?.name }}</p>
+    <h5>Welcome, <strong>{{ (userDetails$ | async)?.name }}!</strong></h5>
+    <p>Your saved posts are listed below - you can apply filters to reload your saved posts or click view on any of the posts to open them on reddit.</p>
 </div>

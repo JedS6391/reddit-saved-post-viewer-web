@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/barebones.css",
               "src/styles.css"
             ],
             "scripts": []

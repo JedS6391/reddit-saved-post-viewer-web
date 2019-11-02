@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { RouterModule } from '@angular/router';
+
 import { PostViewerComponent } from './post-viewer.component';
 import { PostViewerApiModule } from './api/post-viewer-api.module';
 import { UserDetailsModule } from './user-details/user-details.module';

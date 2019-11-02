@@ -9,7 +9,8 @@ const POLLING_INTERVAL = 5000;
 
 @Component({
     selector: 'app-main-post-viewer-post-list',
-    templateUrl: './post-list.component.html'
+    templateUrl: './post-list.component.html',
+    styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit, OnDestroy {
     public isPolling$: Observable<boolean>;
@@ -41,7 +42,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
         this.hasGoldSubscription$ = this.postViewerFacade
             .getUserDetails()
-            .pipe(map(userDetails => userDetails.hasGoldSubscription));
+            .pipe(map(userDetails => userDetails && userDetails.hasGoldSubscription));
 
         this.pollJobStatus();
     }

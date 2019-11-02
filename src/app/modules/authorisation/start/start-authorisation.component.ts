@@ -5,8 +5,7 @@ import { OAuthUrl } from '../api/models/oauth-url.interface';
 
 @Component({
     selector: 'app-main-authorisation-start',
-    templateUrl: './start-authorisation.component.html',
-    styleUrls: ['./start-authorisation.component.css']
+    templateUrl: './start-authorisation.component.html'
 })
 export class StartAuthorisationComponent implements OnInit {
     public oAuthUrl$: Observable<OAuthUrl>;
