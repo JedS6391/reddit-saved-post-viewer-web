@@ -24,4 +24,15 @@ export class AuthorisationEffects {
             );
         })
     );
+
+    @Effect()
+    public validate$ = this.actions$.pipe(
+        ofType<actions.ValidateAction>(actions.ValidateAction.TYPE),
+        switchMap(action => {
+            return this.authorisationApiService.validate(action.state, action.code).pipe(
+                map(token => new actions.ValidateSuccessAction(token)),
+                catchError(error => of(new actions.ValidateFailureAction(error)))
+            );
+        })
+    );
 }

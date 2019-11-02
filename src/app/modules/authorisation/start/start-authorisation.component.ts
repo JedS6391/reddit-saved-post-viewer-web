@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorisationFacade } from '../store/authorisation-store.facade';
+import { Observable } from 'rxjs';
+import { OAuthUrl } from '../api/models/oauth-url.interface';
 
 @Component({
-  selector: 'app-authorisation',
-  templateUrl: './authorisation.component.html',
-  styleUrls: ['./authorisation.component.css']
+    selector: 'app-main-authorisation-start',
+    templateUrl: './start-authorisation.component.html',
+    styleUrls: ['./start-authorisation.component.css']
 })
 export class StartAuthorisationComponent implements OnInit {
+    public oAuthUrl$: Observable<OAuthUrl>;
 
-  constructor() { }
+    constructor(private authorisationFacade: AuthorisationFacade) { }
 
-  public ngOnInit(): void {
-    console.log('ngOnInit');
-  }
+    public ngOnInit(): void {
+        this.authorisationFacade.fetchOAuthUrl();
+
+        this.oAuthUrl$ = this.authorisationFacade.getOAuthUrl();
+    }
 }

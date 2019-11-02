@@ -5,4 +5,4 @@
   so that your saved posts can be accessed.
 </p>
 
-<a href="">Authorise</a>
+<a href="{{ (oAuthUrl$ | async)?.url }}">Authorise</a>

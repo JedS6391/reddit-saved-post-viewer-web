@@ -15,7 +15,10 @@ export function authorisationReducer(state: AuthorisationState = AUTHORISATION_I
     return applyReducers(state, action, {
         [actions.GetOAuthUrlAction.TYPE]: getOAuthUrlActionHandler,
         [actions.GetOAuthUrlSuccessAction.TYPE]: getOAuthUrlActionSuccessHandler,
-        [actions.GetOAuthUrlFailureAction.TYPE]: getOAuthUrlActionFailureHandler
+        [actions.GetOAuthUrlFailureAction.TYPE]: getOAuthUrlActionFailureHandler,
+        [actions.ValidateAction.TYPE]: validateActionHandler,
+        [actions.ValidateSuccessAction.TYPE]: validateSuccessActionHandler,
+        [actions.ValidateFailureAction.TYPE]: validateFailureActionHandler
     });
 }
 
@@ -36,6 +39,30 @@ function getOAuthUrlActionSuccessHandler(state: AuthorisationState, action: acti
 
 
 function getOAuthUrlActionFailureHandler(state: AuthorisationState, action: actions.GetOAuthUrlFailureAction): AuthorisationState {
+    return {
+        ...state,
+        isLoading: false,
+        lastError: action.error
+    };
+}
+
+function validateActionHandler(state: AuthorisationState): AuthorisationState {
+    return {
+        ...state,
+        isLoading: true
+    };
+}
+
+function validateSuccessActionHandler(state: AuthorisationState, action: actions.ValidateSuccessAction): AuthorisationState {
+    return {
+        ...state,
+        isLoading: false,
+        token: action.token
+    };
+}
+
+
+function validateFailureActionHandler(state: AuthorisationState, action: actions.ValidateFailureAction): AuthorisationState {
     return {
         ...state,
         isLoading: false,

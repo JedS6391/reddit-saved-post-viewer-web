@@ -1,0 +1,12 @@
+<h3>Posts</h3>
+
+<p *ngIf="(isPolling$ | async)">Loading...</p>
+
+<div *ngIf="!(isPolling$ | async)">
+    <ul>
+        <li *ngFor="let post of savedPosts$ | async">
+            <a  href="https://www.reddit.com{{ post.permalink }}">{{ post.title }}</a>
+        </li>
+    </ul>
+</div>
+

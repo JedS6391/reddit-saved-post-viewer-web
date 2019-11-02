@@ -1,0 +1,7 @@
+<h3>User details</h3>
+
+<p *ngIf="(isLoading$ | async)">Loading...</p>
+
+<div *ngIf="!(isLoading$ | async)">
+    <p>Name: {{ (userDetails$ | async)?.name }}</p>
+</div>
