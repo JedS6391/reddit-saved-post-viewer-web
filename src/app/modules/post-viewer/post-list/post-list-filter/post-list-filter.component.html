@@ -1,0 +1,15 @@
+<form 
+    [formGroup]="filterFormGroup" 
+    (ngSubmit)="applyFilter()">
+    <div>
+        <label for="limit">Limit</label>
+        <select id="limit" formControlName="limit">
+            <option *ngFor="let limitOption of limitOptions$ | async;" [value]="limitOption.value">{{ limitOption.label }}</option>
+        </select>
+
+        <label *ngIf="allowSubredditFiltering" for="subreddit">Subreddit</label>
+        <input *ngIf="allowSubredditFiltering" type="text" id="subreddit" formControlName="subreddit" />
+
+        <button type="submit" [disabled]="!(isReady$ | async)">Filter</button>
+    </div>
+</form>

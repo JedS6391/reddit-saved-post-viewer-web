@@ -1,5 +1,10 @@
 <h3>Posts</h3>
 
+<app-main-post-viewer-post-list-filter
+    [allowSubredditFiltering]="(hasGoldSubscription$ | async)"
+    (filterApplied)="onFilterApplied()"
+></app-main-post-viewer-post-list-filter>
+
 <p *ngIf="(isPolling$ | async)">Loading...</p>
 
 <div *ngIf="!(isPolling$ | async)">

@@ -5,6 +5,8 @@ import { map, filter, withLatestFrom, takeUntil } from 'rxjs/operators';
 import { PostViewerFacade } from '../store/post-viewer-store.facade';
 import { JobState, Post } from '../api/models/post.interface';
 
+const POLLING_INTERVAL = 5000;
+
 @Component({
     selector: 'app-main-post-viewer-post-list',
     templateUrl: './post-list.component.html'
@@ -12,6 +14,7 @@ import { JobState, Post } from '../api/models/post.interface';
 export class PostListComponent implements OnInit, OnDestroy {
     public isPolling$: Observable<boolean>;
     public savedPosts$: Observable<Post[]>;
+    public hasGoldSubscription$: Observable<boolean>;
 
     private destroyed$ = new Subject();
     private stopPolling$ = new Subject();
@@ -20,10 +23,12 @@ export class PostListComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this.isPolling$ = this.postViewerFacade.getIsPolling();
-        this.savedPosts$ = this.postViewerFacade.getJobStatus().pipe(
-            filter(jobStatus => jobStatus && jobStatus.state === JobState.Finished),
-            map(jobStatus => jobStatus.result)
-        );
+        this.savedPosts$ = this.postViewerFacade
+            .getJobStatus()
+            .pipe(
+                filter(jobStatus => jobStatus && jobStatus.state === JobState.Finished),
+                map(jobStatus => jobStatus.result)
+            );
 
         this.savedPosts$
             .pipe(takeUntil(this.destroyed$))
@@ -34,6 +39,10 @@ export class PostListComponent implements OnInit, OnDestroy {
                 this.stopPolling$.next();
             });
 
+        this.hasGoldSubscription$ = this.postViewerFacade
+            .getUserDetails()
+            .pipe(map(userDetails => userDetails.hasGoldSubscription));
+
         this.pollJobStatus();
     }
 
@@ -42,10 +51,14 @@ export class PostListComponent implements OnInit, OnDestroy {
         this.stopPolling$.next();
     }
 
+    public onFilterApplied(): void {
+        this.pollJobStatus();
+    }
+
     private pollJobStatus(): void {
         this.postViewerFacade.beginPolling();
 
-        interval(2000).pipe(
+        interval(POLLING_INTERVAL).pipe(
             withLatestFrom(this.postViewerFacade.getJob()),
             filter(([, job]) => job !== null && job !== undefined),
             map(([, job]) => {
@@ -55,9 +68,3 @@ export class PostListComponent implements OnInit, OnDestroy {
         ).subscribe();
     }
 }
-
-            // takeWhile(([, , jobStatus], _) => jobStatus.state === JobState.Finished),
-            // map(([, job, _]) => {
-            //     this.postViewerFacade.fetchJobStatus(job);
-            // }),
-            // takeUntil(this.destroyed$)

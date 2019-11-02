@@ -98,7 +98,7 @@ export class PostViewerApiService implements OnDestroy {
 
         const queryParameterString = queryParameters
             .map(queryParameter => `${queryParameter.name}=${queryParameter.value}`)
-            .join('');
+            .join('&');
 
         return `${url}${queryParameterString}`;
     }
