@@ -7,6 +7,7 @@ import { ROOT_ROUTES } from './root.routes';
 import { RootComponent } from './root.component';
 import { AUTHORISATION_BASE_URL_TOKEN } from './modules/authorisation/api/authorisation-api.service';
 import { POST_VIEWER_BASE_URL_TOKEN } from './modules/post-viewer/api/post-viewer-api.service';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     imports: [
@@ -20,11 +21,11 @@ import { POST_VIEWER_BASE_URL_TOKEN } from './modules/post-viewer/api/post-viewe
         // TODO: Get this from config? Consolidate into one injection token?
         {
             provide: AUTHORISATION_BASE_URL_TOKEN,
-            useValue: 'http://127.0.0.1:8000/v1'
+            useValue: environment.baseUrl
         },
         {
             provide: POST_VIEWER_BASE_URL_TOKEN,
-            useValue: 'http://127.0.0.1:8000/v1'
+            useValue: environment.baseUrl
         }
     ],
     bootstrap: [RootComponent]
