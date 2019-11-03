@@ -6,7 +6,7 @@ import { AuthorisationFacade } from '../store/authorisation-store.facade';
 
 @Component({
     selector: 'app-main-authorisation-validate',
-    template: `<p>Loading...</p>`,
+    template: `<p>Redirecting...</p><app-main-spinner></app-main-spinner>`,
 })
 export class ValidateAuthorisationComponent implements OnInit, OnDestroy {
     private destroyed$ = new Subject();
