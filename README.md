@@ -1,4 +1,4 @@
-# Reddit saved post application
+# Reddit saved post viewer - web
 
 This project contains a web application for viewing reddit saved posts.
 
