@@ -18,7 +18,6 @@ import { environment } from 'src/environments/environment';
     ],
     declarations: [RootComponent],
     providers: [
-        // TODO: Get this from config? Consolidate into one injection token?
         {
             provide: AUTHORISATION_BASE_URL_TOKEN,
             useValue: environment.baseUrl
