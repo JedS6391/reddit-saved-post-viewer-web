@@ -1,4 +1,4 @@
-<app-main-spinner *ngIf="(isLoading$ | async)"></app-main-spinner>
+<app-main-spinner [enabled]="(isLoading$ | async)"></app-main-spinner>
 
 <div *ngIf="!(isLoading$ | async)">
     <h5>Welcome, <strong>{{ (userDetails$ | async)?.name }}!</strong></h5>

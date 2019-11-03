@@ -3,7 +3,7 @@
     (filterApplied)="onFilterApplied()"
 ></app-main-post-viewer-post-list-filter>
 
-<app-main-spinner *ngIf="(isPolling$ | async)"></app-main-spinner>
+<app-main-spinner [enabled]="(isPolling$ | async)"></app-main-spinner>
 
 <div *ngIf="!(isPolling$ | async)" class="grid-container quarters post-list">
     <div *ngFor="let post of savedPosts$ | async" class="post-list-card">
