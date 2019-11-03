@@ -6,3 +6,10 @@
 .post-filter-button {
     margin-left: 10px;
 }
+
+.post-filter-button:disabled {
+    border-color: var(--border-color-softer);
+    color: var(--border-color-softer);
+    cursor: not-allowed;
+    pointer-events: all !important;
+}

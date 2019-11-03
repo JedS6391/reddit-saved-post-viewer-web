@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { PostViewerState } from './post-viewer-state';
 import * as actions from './post-viewer-store.actions';
-import { applyReducers } from '../../../shared/apply-reducers';
+import { executeReducer, ActionHandlerMap } from '../../../shared/reducer-helpers';
 
 export const POST_VIEWER_INITIAL_STATE: PostViewerState = {
     userDetails: null,
@@ -14,20 +14,22 @@ export const POST_VIEWER_INITIAL_STATE: PostViewerState = {
     lastError: null
 };
 
+const handlerMap: ActionHandlerMap<PostViewerState> = {
+    [actions.GetUserDetails.TYPE]: getUserDetailsHandler,
+    [actions.GetUserDetailsSuccess.TYPE]: getUserDetailsSuccessHandler,
+    [actions.GetUserDetailsFailure.TYPE]: getUserDetailsFailureHandler,
+    [actions.GetSavedPosts.TYPE]: getSavedPostsHandler,
+    [actions.GetSavedPostsSuccess.TYPE]: getSavedPostsSuccessHandler,
+    [actions.GetSavedPostsFailure.TYPE]: getSavedPostsFailureHandler,
+    [actions.GetJobStatus.TYPE]: getJobStatusHandler,
+    [actions.GetJobStatusSuccess.TYPE]: getJobStatusSuccessHandler,
+    [actions.GetJobStatusFailure.TYPE]: getJobStatusFailureHandler,
+    [actions.BeginPolling.TYPE]: beginPollingHandler,
+    [actions.EndPolling.TYPE]: endPollingHandler
+};
+
 export function postViewerReducer(state: PostViewerState = POST_VIEWER_INITIAL_STATE, action: Action) {
-    return applyReducers(state, action, {
-        [actions.GetUserDetails.TYPE]: getUserDetailsHandler,
-        [actions.GetUserDetailsSuccess.TYPE]: getUserDetailsSuccessHandler,
-        [actions.GetUserDetailsFailure.TYPE]: getUserDetailsFailureHandler,
-        [actions.GetSavedPosts.TYPE]: getSavedPostsHandler,
-        [actions.GetSavedPostsSuccess.TYPE]: getSavedPostsSuccessHandler,
-        [actions.GetSavedPostsFailure.TYPE]: getSavedPostsFailureHandler,
-        [actions.GetJobStatus.TYPE]: getJobStatusHandler,
-        [actions.GetJobStatusSuccess.TYPE]: getJobStatusSuccessHandler,
-        [actions.GetJobStatusFailure.TYPE]: getJobStatusFailureHandler,
-        [actions.BeginPolling.TYPE]: beginPollingHandler,
-        [actions.EndPolling.TYPE]: endPollingHandler
-    });
+    return executeReducer(state, action, handlerMap);
 }
 
 function getUserDetailsHandler(state: PostViewerState): PostViewerState {
